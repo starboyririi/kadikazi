@@ -1,93 +1,78 @@
-// src/Components/LoginRegister/LoginRegister.js
-// src/Components/LoginRegister/LoginRegister.js
-import React, { useState } from 'react';
-import { FaUser, FaLock, FaEnvelope } from "react-icons/fa";
-import './Lockscreen.css';
-import { useNavigate } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { FaLock } from "react-icons/fa";
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+import './Lockscreen.css';
 
-const LoginRegister = () => {
-  const navigate= useNavigate();
-  const [action, setAction] = useState('');
-
-  const passwordLink = () => {
-    setAction(' active');
-    navigate()
-  };
-  
-  return (
-    <div className={`wrapper${action}`}>
-      <div className='form-box Login'>
-        <Login />
-        <a href="#" onClick={passwordLink}>Forgot password?</a>
-        <div className='register-link'>
-          <p>Don't have an account? <a href="http://localhost:3000/register" >Register</a></p>
-        </div>
-      </div>
-      <div className='form-box Password'>
-        <ForgotPassword />
-        <div className='register-link'>
-          <p>Already have an account? <a href="http://localhost:3000/login" >Login</a></p>
-        </div>
-      </div>
-      
-      </div>
-    
-  );
-};
-function Login() {
-  const [lvalues, setLValues] = useState({
-    EmailAddress: '',
-    Password: ''
-  });
+const LockScreen = () => {
+  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState('');
+  const [message, setMessage] = useState('');
   const navigate = useNavigate();
-  axios.defaults.withCredentials = true;
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    axios
-      .post('http://localhost:8081/lockscreen', lvalues)
+  useEffect(() => {
+    axios.get('http://localhost:8081')
       .then(res => {
         if (res.data.Status === "Success") {
-          console.log('Successful Login', lvalues);
-          navigate('/index'); // Redirect to the homepage or any other page after login
+          setEmail(res.data.EmailAddress);
         } else {
-          alert(res.data.Error);
+          setMessage(res.data.Error);
         }
       })
-      .catch(err => console.log(err));
-    console.log('Form submitted:', lvalues);
+      .catch(err => {
+        console.log(err);
+        setMessage("An error occurred while fetching data.");
+      });
+  }, []);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const res = await axios.post('http://localhost:8081/lockscreen', { EmailAddress: email, Password: password });
+      if (res.data.Status === "Success") {
+        console.log('Successful Login');
+        navigate(-1); // Redirect to the previous page
+      } else {
+        alert(res.data.Message);
+        console.log(email);
+      }
+    } catch (err) {
+      console.error('Error during lockscreen check:', err);
+      alert('Error during lockscreen check. Please try again.');
+      console.log(email);
+    }
+    console.log('Form submitted:', { EmailAddress: email, Password: password });
   };
 
   return (
-    <body>
-        
-    
-    <form onSubmit={handleSubmit}>
-      <h1>LockScreen</h1>
-      
-      <div className='input-box'>
-        <input
-          type="password"
-          placeholder='Password'
-          value={lvalues.Password}
-          onChange={(e) => setLValues({ ...lvalues, Password: e.target.value })}
-          required
-        />
-        <FaLock className='icon' />
-      </div>
-      <button type='submit'>Login</button>
-    </form>
-    </body>
+    <div className='lockscreen'>
+      <form onSubmit={handleSubmit}>
+        <h1 className='myHeading'>LockScreen</h1>
+        <div className='myInput-box'>
+          <input
+            type="email"
+            placeholder='email'
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            hidden
+          />
+        </div>
+        <div className='myInput-box'>
+          <input
+            type="password"
+            placeholder='Password'
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+            autoComplete='off'
+          />
+          <FaLock className='icon' />
+        </div>
+        <button className='myButton' type='submit'>Login</button>
+      </form>
+      {message && <p>{message}</p>}
+    </div>
   );
-}
+};
 
-
-
-
-
-
-
-
-
-export default LoginRegister;
+export default LockScreen;

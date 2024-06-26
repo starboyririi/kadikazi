@@ -9,7 +9,8 @@ body{
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 100vh;
+  min-height: 125vh;
+  
   background: linear-gradient(rgba(0,0,0,0.75),#000000bf), url('./Components/Images/Background1.png')
   no-repeat ;
   background-size: cover;

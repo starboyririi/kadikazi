@@ -9,10 +9,19 @@ import { DropdownButton, Dropdown } from 'react-bootstrap';
 const Register = () => {
     return (
         <div className="wrapper">
-            <div className="form-box register">
+            <div className="form-box Register">
                 <Registration />
                 <div className="register-link">
                     <p>Already have an account? <a href="/login">Login</a></p>
+                </div>
+                <div className='Guidelines'>
+                <a>Password Guidelines</a>
+                <ul>
+                    <li>8 or more characters long</li>
+                    <li>Contain at least one uppercase letter</li>
+                <li>Contain at least one lowercase letter</li> 
+                <li>Contain at least a special characters: @ # \ /</li>
+                </ul>
                 </div>
             </div>
         </div>
@@ -49,12 +58,12 @@ function Registration() {
     }
   
       // Check if email already exists
-      // axios.post('http://localhost:8081/check-email', { EmailAddress: rvalues.EmailAddress })
-      //     .then(res => {
-      //         if (res.data.exists) {
-      //             setMessage('Email already exists');
-      //         } else {
-                  // Proceed with registration
+      axios.post('http://localhost:8081/check-email', { EmailAddress: rvalues.EmailAddress })
+          .then(res => {
+              if (res.data.exists) {
+                  setMessage('Email already exists');
+              } else {
+                //   Proceed with registration
                   axios.post('http://localhost:8081/fregister', rvalues)
                       .then(res => {
                           if (res.data.Status === "Success") {
@@ -71,12 +80,12 @@ function Registration() {
                           console.error(err);
                           setMessage('An error occurred. Please try again.');
                       });
-              // }
-          // })
-          // .catch(err => {
-          //     console.error(err);
-          //     setMessage('An error occurred. Please try again.');
-          // });
+              }
+          })
+          .catch(err => {
+              console.error(err);
+              setMessage('An error occurred. Please try again.');
+          });
   };
   
   
@@ -91,7 +100,7 @@ function Registration() {
                 </div>
             ) : (
                 <form onSubmit={handleSubmit}>
-                    <h1>Registration</h1>
+                    <h1 className='Title'>Registration</h1>
                     <div className="input-box">
                         <input
                             type="email"
@@ -142,6 +151,7 @@ function Registration() {
                             I agree to the terms & conditions
                         </label>
                     </div>
+                        
                     <button  type="submit">Submit</button>
                     {message && <div className="error-message">{message}</div>}
                 </form>

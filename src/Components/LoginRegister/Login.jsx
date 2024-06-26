@@ -1,61 +1,65 @@
-// src/Components/LoginRegister/LoginRegister.js
-// src/Components/LoginRegister/LoginRegister.js
 import React, { useState } from 'react';
+import { useCookies } from 'react-cookie';
 import { FaUser, FaLock, FaEnvelope } from "react-icons/fa";
-import './Login.css';
-import { useNavigate } from 'react-router-dom';
+import './LoginRegister.css';
+import { useNavigate,  } from 'react-router-dom';
 import axios from 'axios';
 
+axios.defaults.withCredentials = true;
+axios.defaults.baseURL = 'http://localhost:8081';
+
 const LoginRegister = () => {
-  const navigate= useNavigate();
+  const navigate = useNavigate();
   const [action, setAction] = useState('');
 
   const passwordLink = () => {
     setAction(' active');
-    navigate()
   };
-  
+
   return (
     <div className={`wrapper${action}`}>
       <div className='form-box Login'>
-        <Login />
-        <a href="#" onClick={passwordLink}>Forgot password?</a>
+        <p>Enter your email address and password</p>
+        <Login navigate={navigate} />
+        <div className='forgotText'>
+          <a href="#" onClick={passwordLink}>Forgot password?</a>
+        </div>
         <div className='register-link'>
-          <p>Don't have an account? <a href="http://localhost:3000/register" >Register</a></p>
+          <p>Don't have an account? <a href="/register">Register</a></p>
         </div>
       </div>
       <div className='form-box Password'>
         <ForgotPassword />
         <div className='register-link'>
-          <p>Already have an account? <a href="http://localhost:3000/login" >Login</a></p>
+          <p>Already have an account? <a href="/login">Login</a></p>
         </div>
       </div>
-      
-      </div>
-    
+    </div>
   );
 };
-function Login() {
+
+const Login = ({ navigate }) => {
   const [lvalues, setLValues] = useState({
     EmailAddress: '',
     Password: ''
   });
-  const navigate = useNavigate();
-  axios.defaults.withCredentials = true;
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    axios
-      .post('http://localhost:8081/login', lvalues)
-      .then(res => {
-        if (res.data.Status === "Success") {
-          console.log('Successful Login', lvalues);
-          navigate('/index'); // Redirect to the homepage or any other page after login
-        } else {
-          alert(res.data.Error);
-        }
-      })
-      .catch(err => console.log(err));
+    try {
+      const res = await axios.post('/login', lvalues);
+      if (res.data.Status === "Success") {
+        console.log('Successful Login', lvalues);
+        // const userType = res.data.userType;
+        // const id = res.data.userId
+        navigate(`/`); // Redirect to the homepage with userType
+      } else {
+        console.log(res.data.Message);
+      }
+    } catch (err) {
+      console.error('Network error:', err);
+      alert('Network error or server is down');
+    }
     console.log('Form submitted:', lvalues);
   };
 
@@ -82,58 +86,44 @@ function Login() {
         />
         <FaLock className='icon' />
       </div>
-      <div className='remember-forgot'>
-        <label>
-          <input type="checkbox" />
-          Remember me
-        </label>
-      </div>
       <button type='submit'>Login</button>
     </form>
   );
-}
+};
 
-
-
-function ForgotPassword() {
+const ForgotPassword = () => {
   const [email, setEmail] = useState('');
 
   const handleSubmit = (e) => {
     e.preventDefault();
     axios
-      .post('http://localhost:8081/send-reset-link', { email })
+      .post('/send-reset-link', { email })
       .then(res => {
         if (res.data.Status === "Success") {
           console.log('Email reset link sent', email);
-           
         } else {
-          alert(res.data.Error);
+          alert(res.data.Message);
         }
       })
       .catch(err => console.error('Error:', err));
   };
 
-    return (
-      <form onSubmit={handleSubmit}>
-        <h1>Forgot Password</h1>
-        <div className='input-box'>
-          <input
-            type="email"
-            placeholder='Email Address'
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
-          <FaEnvelope className='icon' />
-        </div>
-        <button type='submit'>Submit</button>
-      </form>
-    );
-  }
-
-
-
-
-
+  return (
+    <form onSubmit={handleSubmit}>
+      <h1>Forgot Password</h1>
+      <div className='input-box'>
+        <input
+          type="email"
+          placeholder='Email Address'
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          required
+        />
+        <FaEnvelope className='icon' />
+      </div>
+      <button type='submit'>Submit</button>
+    </form>
+  );
+};
 
 export default LoginRegister;

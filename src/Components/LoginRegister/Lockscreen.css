@@ -1,12 +1,14 @@
-.wrapper {
+/* src/Components/LoginRegister/Lockscreen.css */
+.lockscreen {
     position: relative;
-    width: 420px;
+    width: 600px !important;
     height: 450px;
     background: transparent;
     backdrop-filter: blur(30px);
     color: #fff;
     display: flex;
     align-items: center;
+    justify-content: center; /* Center the form */
     overflow: hidden;
     transition: height 0.2s ease;
 }
@@ -15,44 +17,30 @@
     height: 520px;
 }
 
-.wrapper .form-box {
+.lockscreen .form-box {
     width: 100%;
     padding: 40px;
 }
 
-.wrapper .form-box.Login {
+.lockscreen .form-box.Lockscreen {
    position: absolute;
    transition: none;
    translate: 0px;
 }
-.wrapper .form-box.Password {
-    transition: .18s ease;
-    translate: 400px;
- }
- .wrapper.active .form-box.Login {
-    transition: none;
-    translate: 400px;
- }
- .wrapper.active .form-box.Password {
-     transition: .18s ease;
-     translate: 0px;
-  }
-
-
 
 form h1 {
     font-size: 36px;
     text-align: center;
 }
 
-form .input-box {
+form .myInput-box {
     position: relative;
-    width: 100%;
+    width: 100% !important;
     height: 50px;
     margin: 30px 0;
 }
 
-.input-box input {
+.myInput-box input {
     width: 100%;
     height: 100%;
     background: transparent;
@@ -65,11 +53,11 @@ form .input-box {
     padding: 20px 45px 20px 20px;
 }
 
-.input-box input::placeholder {
+.myInput-box input::placeholder {
     color: #fff;
 }
 
-.input-box .icon {
+.myInput-box .icon {
     position: absolute;
     right: 20px;
     top: 50%;
@@ -98,8 +86,8 @@ form .remember-forgot {
     text-decoration: underline;
 }
 
-form button {
-    width: 100%;
+form .myButton {
+    width: 100% !important ;
     height: 45px;
     background: #fff;
     border: none;
@@ -126,4 +114,9 @@ form .register-link {
 
 .register-link p a:hover {
     text-decoration: underline;
+}
+
+.myHeading {
+    position: inherit;
+    left: 300px;
 }
