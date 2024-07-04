@@ -1,70 +1,125 @@
-# Getting Started with Create React App
+# Kadikazi: Car Wash Management System
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+#### Welcome to KADIKAZI 🚗🚿
+Kadikazi is a cutting-edge car wash management web application built using Javascript (React) and MySQL. In the realm of car wash management, integrating digital technologies is essential for optimizing efficiency and enhancing customer satisfaction. Kadikazi offers a seamless platform for booking appointments and making secure payments for the car wash services that have been offered. This project aims to improve operational efficiency, financial management, and customer satisfaction in car wash businesses.
 
-## Available Scripts
+### 🚀 Getting Started
 
-In the project directory, you can run:
+To clone the Kadikazi repository and get the project running on your machine, follow these detailed steps:
 
-### `npm start`
+1. **Clone the Repository**:
+   ```bash
+   git clone https://github.com/Mosweta/kadikazi3.git
+   cd kadikazi3
+   ```
+   
+2. **Install Dependencies**:
+   ```bash
+   node install-dependencies.js
+   ```
+   
+3. **Run the App**:
+   ```bash
+   npm start 
+   nodemonserver.js
+   ```
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### Detailed Steps with Links and Commands:
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+1. **Install Visual Studio Code**:
+   - Visit the [VS Code installation page](https://code.visualstudio.com/download) and follow the instructions for your operating system.
 
-### `npm test`
+2. **Install Git**:
+   - Visit the [Git installation page](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git) and download the installer for Windows.
+   - Run the downloaded installer and follow the setup wizard. Ensure to adjust your PATH environment and choose appropriate settings.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+3. **Set Up MySQL Workbench**:
+   - Download MySQL Workbench from [MySQL Workbench download page](https://dev.mysql.com/downloads/workbench/).
+   - Install MySQL Workbench and create a new connection for your MySQL server with specified details.
 
-### `npm run build`
+4. **Clone the Repository**:
+   ```bash
+   git clone https://github.com/Mosweta/kadikazi3.git
+   cd kadikazi3
+   ```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+5. **Install Dependencies**:
+  
+   ```bash
+    cd kadikazi
+    node install-dependencies.js
+   ```
+   
+   ```bash
+   cd carWashBackEnd
+   node install-dependencies.js
+   ```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+7. **Configure MySQL**:
+   - Refer to [MySQL Workbench documentation](https://dev.mysql.com/doc/workbench/en/) if you encounter any issues.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+8. **Run the App**:
+   - Ensure your environment is set up correctly, then run:
+     
+   ```bash
+   cd kadikazi
+   npm start app.js
+   ```
+   
+   ```bash
+   cd carWashBackEnd
+   nodemon server.js
+   ```
+   
+   Access the web application through [localhost:3000](http://localhost:3000).
 
-### `npm run eject`
+---
+### 🚀 Our Aim
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+Kadikazi aims to improve operational efficiency, financial management, and customer satisfaction in car wash businesses.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### 🌟 Key Features
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+- **Efficient Booking Services**: Easily book a session and have your car washed with the option for pickup after washing.
+  
+- **Secure Payment Transactions**: Enjoy top-notch security with payment services and mandatory email verification for account registration.
+  
+- **User-Friendly Onboarding**: Create an account using email for hassle-free access.
+  
+- **User Profiles**: Edit profile details such as picture, bio, username, or password anytime.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+### 🔒 Security Features
 
-## Learn More
+- **Email Verification**: Protect your account with mandatory email verification.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### 🔄 Database
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+- **MySQL Workbench**: Kadikazi uses MySQL as its backend database, providing a reliable and scalable solution.
 
-### Code Splitting
+### 📱 User Experience
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+- **Seamless Account Creation**: Choose to continue with email for a hassle-free experience or use email for manual verification.
+  
+- **Profile Management**: Update your profile details anytime to keep your information current.
+  
+- **Intuitive Interaction**: The application is designed for intuitive navigation and usability.
 
-### Analyzing the Bundle Size
+### 💳 Payment Methods
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+Kadikazi integrates with trusted payment gateways to ensure secure and convenient transactions, including:
 
-### Making a Progressive Web App
+- **Mpesa**: Direct mobile payment integration for seamless transactions.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+### Join the Kadikazi Community!
 
-### Advanced Configuration
+Be a part of our growing community and journey in connecting businesses with clients.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+### 📣 Support Us
 
-### Deployment
+- Fork the repository.
+- Clone the repository locally.
+- Use and modify the code to enhance the project.
+- Contribute back by pushing changes and improvements.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+---
 
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
